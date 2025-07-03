@@ -1,0 +1,32 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch used for staging (e.g., staging)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Install dependencies (if applicable)
+      - name: Install dependencies
+        run: |
+          npm install  # Replace with your build tool command
+
+      # Step 3: Build the site (if applicable)
+      - name: Build the site
+        run: |
+          npm run build  # Replace with your build command
+
+      # Step 4: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Replace with the directory containing your built site
