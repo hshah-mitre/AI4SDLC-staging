@@ -16,13 +16,13 @@ jobs:
      
       - name: Debug repository URL
         run: echo "Token = $TOKEN"
-   
 
       # Step 2: Push code to production repository
       - name: Push code to production repository
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
           git remote add production https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
           git fetch production
           git push production HEAD:main  # Push staging `main` branch to production `main` branch
