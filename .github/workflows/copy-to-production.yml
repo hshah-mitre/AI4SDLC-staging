@@ -18,6 +18,9 @@ jobs:
       - name: Debug repository URL
         run: echo "Token = $TOKEN"
 
+      - name: Debug Secret
+        run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"   
+
       # Step 2: Push code to production repository
       - name: Push code to production repository
         run: |
