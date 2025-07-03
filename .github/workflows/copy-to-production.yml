@@ -13,6 +13,10 @@ jobs:
       # Step 1: Checkout the staging repository
       - name: Checkout staging repository
         uses: actions/checkout@v3
+     
+      - name: Debug repository URL
+        run: echo "Repository URL https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/username/my-project-production.git"
+   
 
       # Step 2: Push code to production repository
       - name: Push code to production repository
