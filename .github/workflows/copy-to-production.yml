@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
      
       - name: Debug repository URL
-        run: echo "Repository URL https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/username/my-project-production.git"
+        run: echo "Token = $TOKEN"
    
 
       # Step 2: Push code to production repository
@@ -26,3 +26,6 @@ jobs:
           git remote add production https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
           git fetch production
           git push production HEAD:main  # Push staging `main` branch to production `main` branch
+
+    env:
+      TOKEN: ${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}
