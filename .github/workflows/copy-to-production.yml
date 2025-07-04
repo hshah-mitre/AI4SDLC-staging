@@ -22,14 +22,22 @@ jobs:
         run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"   
 
       # Step 2: Push code to production repository
-      - name: Push code to production repository
+      #- name: Push code to production repository
+      #  run: |
+      #    git config --global user.name "GitHub Actions"
+      #    git config --global user.email "actions@github.com"
+      #    git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
+      #    git remote add production https://hshah-mitre:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
+      #    git fetch production
+      #    git push production HEAD:main  # Push staging `main` branch to production `main` branch
+
+      - name: Use GITHUB_TOKEN
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
-          git remote add production https://hshah-mitre:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
-          git fetch production
-          git push production HEAD:main  # Push staging `main` branch to production `main` branch
+          echo "Using GITHUB_TOKEN to authenticate"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
+          git push origin main          
 
     env:
       TOKEN: ${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}
