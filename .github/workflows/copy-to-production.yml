@@ -29,7 +29,7 @@ jobs:
           git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
           #git remote add production https://hshah-mitre:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
           #git fetch production
-          git push https://x-access-token:${{ secrets.PRODUCTION_PAT }}@github.com/hshah-mitre/AI4SDLC-production.git main:main
+          git push https://x-access-token:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git main:main
           #git push production HEAD:main  # Push staging `main` branch to production `main` branch
 
       - name: Use GITHUB_TOKEN
