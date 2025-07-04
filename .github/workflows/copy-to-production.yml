@@ -20,6 +20,11 @@ jobs:
 
       - name: Debug Secret
         run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"
+      - name: Push code to production repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git push https://x-access-token:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git main:main
       
       # Step 2: Push code to production repository
       - name: Push code to production repository
@@ -31,14 +36,6 @@ jobs:
           #git fetch production
           git push https://x-access-token:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git main:main
           #git push production HEAD:main  # Push staging `main` branch to production `main` branch
-
-      - name: Use GITHUB_TOKEN
-        run: |
-          echo "Using GITHUB_TOKEN to authenticate"
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
-          git push origin main          
-
+        
     env:
       TOKEN: ${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}
