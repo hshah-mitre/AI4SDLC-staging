@@ -21,22 +21,15 @@ jobs:
       - name: Debug Secret
         run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"
       
-      - name: Debug GITHUB_TOKEN permissions
-        run: |
-          echo "Checking GITHUB_TOKEN permissions..."
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               https://api.github.com/repos/hshah-mitre/AI4SDLC-production
-        
-
       # Step 2: Push code to production repository
-      #- name: Push code to production repository
-      #  run: |
-      #    git config --global user.name "GitHub Actions"
-      #    git config --global user.email "actions@github.com"
-      #    git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
-      #    git remote add production https://hshah-mitre:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
-      #    git fetch production
-      #    git push production HEAD:main  # Push staging `main` branch to production `main` branch
+      - name: Push code to production repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git ls-remote https://${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
+          git remote add production https://hshah-mitre:${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}@github.com/hshah-mitre/AI4SDLC-production.git
+          git fetch production
+          git push production HEAD:main  # Push staging `main` branch to production `main` branch
 
       - name: Use GITHUB_TOKEN
         run: |
