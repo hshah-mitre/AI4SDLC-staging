@@ -19,7 +19,14 @@ jobs:
         run: echo "Token = $TOKEN"
 
       - name: Debug Secret
-        run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"   
+        run: echo "${{ secrets.PRODUCTION_REPO_ACCESS_TOKEN }}"
+      
+      - name: Debug GITHUB_TOKEN permissions
+        run: |
+          echo "Checking GITHUB_TOKEN permissions..."
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               https://api.github.com/repos/hshah-mitre/AI4SDLC-production
+        
 
       # Step 2: Push code to production repository
       #- name: Push code to production repository
